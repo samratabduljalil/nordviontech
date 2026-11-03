@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NORDVION TECH | Beyond Innovation</title>
+<meta name="description" content="AI-powered software solutions for startups and enterprises.">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fff; --soft:#F3F6FD; --ink:#0A1030; --mute:#5B6482; --line:#E3E8F5;
+  --cyan:#00D4FF; --blue:#1E5BFF; --violet:#A63BFF;
+  --grad:linear-gradient(120deg,var(--cyan),var(--blue) 55%,var(--violet));
+  --display:"Bricolage Grotesque",system-ui,sans-serif;
+  --body:"Instrument Sans",system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+h1,h2,h3{font-family:var(--display);line-height:1.05;letter-spacing:-.03em}
+h2{font-size:clamp(2rem,4.5vw,3.4rem);max-width:16ch}
+.sec{padding:110px 0}
+
+/* nav */
+header{position:fixed;inset:0 0 auto;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;letter-spacing:.02em}
+.brand img{width:30px;height:30px;object-fit:contain}
+.links{display:flex;gap:30px;align-items:center;font-weight:500;font-size:.95rem}
+.links a:not(.btn):hover{color:var(--blue)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 24px;border-radius:99px;font-weight:600;border:0;cursor:pointer;font:600 1rem var(--body);transition:transform .2s,box-shadow .2s}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.grad{background:var(--grad);color:#fff;box-shadow:0 10px 30px -10px var(--blue)}
+.btn.ghost{border:1.5px solid var(--line)}
+.btn:hover{transform:translateY(-2px)}
+.burger{display:none;background:none;border:0;font-size:1.6rem;cursor:pointer}
+
+/* hero */
+.hero{padding:150px 0 80px;position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(3rem,8vw,6.4rem);font-weight:800}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{font-size:1.2rem;color:var(--mute);max-width:46ch;margin:26px 0 34px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.mark{position:relative;display:grid;place-items:center}
+.mark::before{content:"";position:absolute;width:85%;aspect-ratio:1;border-radius:50%;background:var(--grad);filter:blur(70px);opacity:.28}
+.mark img{position:relative;width:min(340px,80%);animation:float 7s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-16px) rotate(2deg)}}
+.hero .rise{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
+.hero .rise:nth-child(2){animation-delay:.12s}.hero .rise:nth-child(3){animation-delay:.24s}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}}
+
+/* signature: marquee bands */
+.bands{padding:40px 0 120px;overflow:hidden}
+.band{overflow:hidden;white-space:nowrap}
+.band.flat{background:var(--grad);padding:46px 0}
+.band.tilt{background:var(--ink);padding:58px 0 90px;margin:-6px -4% 0;transform:rotate(-2.2deg) translateY(-18px);box-shadow:0 40px 60px -30px rgba(10,16,48,.45);position:relative;z-index:-1}
+.track{display:inline-flex;gap:0;animation:slide 38s linear infinite}
+.tilt .track{animation-direction:reverse;animation-duration:46s}
+.track span{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,2.6vw,2.1rem);color:#fff;padding:0 clamp(28px,5vw,64px);opacity:.95}
+.tilt .track span{opacity:.75;font-weight:500}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+/* services */
+.head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:56px}
+.head p{color:var(--mute);max-width:42ch}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.card{padding:34px;border-radius:28px;background:var(--soft);grid-column:span 2;transition:background .3s}
+.card.wide{grid-column:span 3}
+.card.hl{background:var(--ink);color:#fff}
+.card.hl p{color:#B6BFDD}
+.card h3{font-size:1.5rem;margin:48px 0 10px}
+.card p{color:var(--mute)}
+.ico{width:52px;height:52px;border-radius:16px;background:#fff;border:1.5px solid var(--line);display:grid;place-items:center;color:var(--blue);transition:background .3s,color .3s,border-color .3s,transform .3s}.ico svg{width:26px;height:26px}.card:hover .ico{background:var(--grad);color:#fff;border-color:transparent;transform:rotate(-6deg) scale(1.06)}.card.hl .ico{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.18);color:var(--cyan)}.card.hl:hover .ico{background:var(--grad);color:#fff}
+.card:hover:not(.hl){background:#E9EFFD}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:2px solid var(--ink)}
+.step{padding:30px 26px 0 0}
+.step b{display:block;font:800 1rem var(--display);color:var(--blue);margin-bottom:34px}
+.step h3{font-size:1.4rem;margin-bottom:8px}
+.step p{color:var(--mute);font-size:.97rem}
+
+/* stats */
+.stats{background:var(--soft);padding:80px 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:30px}
+.stats strong{display:block;font:800 clamp(2.4rem,5vw,4rem)/1.1 var(--display);letter-spacing:-.04em}
+.stats span{color:var(--mute)}.stats strong{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* contact */
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px}
+.contact p.lead{color:var(--mute);margin:22px 0 0;max-width:38ch}
+form{display:grid;gap:14px}
+label{font-weight:600;font-size:.9rem;display:grid;gap:6px}
+input,textarea,select{font:inherit;padding:14px 16px;border:1.5px solid var(--line);border-radius:14px;background:#fff;width:100%}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(30,91,255,.12)}
+textarea{min-height:120px;resize:vertical}
+.ok{color:#0a8a4a;font-weight:600;min-height:1.4em}
+
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--mute);font-size:.92rem}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+@media(max-width:860px){
+  .burger{display:block}
+  .links{position:absolute;top:68px;left:0;right:0;background:#fff;flex-direction:column;padding:24px;gap:18px;border-bottom:1px solid var(--line);display:none}
+  .links.open{display:flex}
+  .hero .wrap,.contact .wrap{grid-template-columns:1fr}
+  .mark{order:-1;max-width:200px}
+  .card,.card.wide{grid-column:span 6}
+  .steps{grid-template-columns:1fr 1fr;row-gap:30px}
+  .stats .wrap{grid-template-columns:1fr}
+  .sec{padding:80px 0}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+/* products */
+.prods{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.prod{border:1.5px solid var(--line);border-radius:28px;overflow:hidden;background:#fff;transition:transform .25s,box-shadow .25s}
+.prod:hover{transform:translateY(-4px);box-shadow:0 24px 50px -28px rgba(30,91,255,.5)}
+.shot{height:230px;padding:26px;display:flex;flex-direction:column;gap:10px;justify-content:flex-end}
+.shot i{display:block;height:14px;border-radius:8px;background:rgba(255,255,255,.55)}
+.shot i:nth-child(1){width:40%;height:22px;background:#fff}
+.shot i:nth-child(2){width:78%}.shot i:nth-child(3){width:58%}
+.shot.a{background:linear-gradient(135deg,#00D4FF,#1E5BFF)}
+.shot.b{background:linear-gradient(135deg,#1E5BFF,#A63BFF)}
+.shot.c{background:linear-gradient(135deg,#0A1030,#1E5BFF)}
+.shot.d{background:linear-gradient(135deg,#A63BFF,#00D4FF)}
+.pinfo{padding:26px 30px 30px}
+.pinfo h3{font-size:1.5rem;margin-bottom:6px}
+.pinfo p{color:var(--mute)}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.tags span{font-size:.82rem;padding:5px 12px;border-radius:99px;background:var(--soft);font-weight:500}
+.tags b{margin-left:auto;font-family:var(--display);color:var(--blue)}
+
+/* clients */
+.logos{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.logos div{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:38px 10px;text-align:center;font:700 1.35rem var(--display);letter-spacing:-.02em;color:#8A93B2;transition:color .2s}
+.logos div:hover{color:var(--ink)}
+.inds{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px}
+.inds span{padding:10px 20px;border-radius:99px;border:1.5px solid var(--line);font-weight:500}
+@media(max-width:860px){.prods{grid-template-columns:1fr}.logos{grid-template-columns:repeat(2,1fr)}.stats .wrap{grid-template-columns:1fr 1fr!important}}
+
+/* ---- alive layer ---- */
+.bar{position:fixed;top:0;left:0;width:100%;height:3px;background:var(--grad);transform-origin:0 50%;transform:scaleX(0);z-index:60}
+.hero{isolation:isolate;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.35;z-index:-1;animation:drift 14s ease-in-out infinite alternate}
+.orb.o1{width:340px;height:340px;background:var(--cyan);top:8%;left:-80px}
+.orb.o2{width:420px;height:420px;background:var(--violet);bottom:-120px;right:-100px;animation-duration:18s}
+@keyframes drift{to{transform:translate(70px,50px) scale(1.15)}}
+.mark{transform:translate(calc(var(--mx,0)*22px),calc(var(--my,0)*22px));transition:transform .25s ease-out}
+.grad-text{background-size:220% 100%;animation:shine 6s ease-in-out infinite alternate}
+@keyframes shine{to{background-position:100% 0}}
+.js .rv{opacity:0;transform:translate3d(var(--x,0),var(--y,0),0) rotate(var(--r,0deg)) scale(var(--s,1));transition:opacity .9s cubic-bezier(.2,.7,.2,1) var(--dl,0s),transform 1s cubic-bezier(.2,.7,.2,1) var(--dl,0s)}
+.js .rv[data-d=left]{--x:-110px;--r:-3deg}
+.js .rv[data-d=right]{--x:110px;--r:3deg}
+.js .rv[data-d=up]{--y:60px}
+.js .rv[data-d=zoom]{--s:.82;--y:24px}
+.js .rv.in{opacity:1;transform:none}
+.js .rv.done{transition:transform .2s ease-out,opacity .3s,box-shadow .25s,background .3s}
+.card,.prod{will-change:transform}
+@media(prefers-reduced-motion:reduce){.js .rv{opacity:1!important;transform:none!important}.orb{display:none}}
+
+/* delivery speed */
+.speeds{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.speed{border-radius:28px;padding:38px;background:var(--soft)}
+.speed.ai{background:var(--ink);color:#fff}
+.speed small{font-weight:600;color:var(--blue)}
+.speed.ai small{color:var(--cyan)}
+.speed .big{font:800 clamp(2.8rem,6vw,4.6rem)/1 var(--display);letter-spacing:-.04em;margin:14px 0 12px}
+.speed p{color:var(--mute);max-width:36ch}
+.speed.ai p{color:#B6BFDD}
+.scale{margin-top:34px}
+.track2{height:14px;border-radius:99px;background:rgba(10,16,48,.08);position:relative;overflow:hidden}
+.speed.ai .track2{background:rgba(255,255,255,.12)}
+.fill{position:absolute;inset:0 auto 0 0;border-radius:99px;width:var(--w);background:var(--grad)}
+.fill.max{opacity:.35;width:var(--w2)}
+.js .speed .fill{width:0;transition:width 1.4s cubic-bezier(.2,.7,.2,1) .5s}
+.js .speed.in .fill{width:var(--w)}
+.js .speed.in .fill.max{width:var(--w2)}
+.wk{display:flex;justify-content:space-between;font-size:.8rem;color:var(--mute);margin-top:8px}
+.speed.ai .wk{color:#8F99BD}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin:-8px 0 30px}
+.chips span{padding:8px 16px;border-radius:99px;background:var(--soft);font-weight:600;font-size:.9rem}
+@media(max-width:860px){.speeds{grid-template-columns:1fr}}
+
+/* footer */
+footer{padding:60px 0 30px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr auto;gap:40px;align-items:start}
+.fbrand p{margin-top:14px;max-width:34ch}
+.fnav{display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;font-weight:500;color:var(--ink)}
+.fnav a:hover{color:var(--blue)}
+.social{display:flex;gap:10px}
+.social a{width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;color:var(--ink);transition:transform .25s,background .25s,color .25s,border-color .25s}
+.social a svg{width:19px;height:19px}
+.social a:hover{background:var(--grad);color:#fff;border-color:transparent;transform:translateY(-4px) rotate(-6deg)}
+.copy{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:.88rem}
+@media(max-width:860px){.foot{grid-template-columns:1fr}}
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+
+<div class="bar" aria-hidden="true"></div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#top"><img src="logo.png" alt="">NORDVION TECH</a>
+    <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#speed">Timelines</a>
+      <a href="#products">Products</a>
+      <a href="#about">Results</a>
+      <a href="#clients">Clients</a>
+      <a class="btn dark" href="#contact">Start a project</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <h1 class="rise">Beyond <span class="grad-text">Innovation</span></h1>
+      <p class="rise">AI-powered software solutions for startups and enterprises. We design, build and ship products that think for themselves.</p>
+      <div class="chips rise"><span>Startup MVP in 5–8 weeks</span><span>AI products in 6–10 weeks</span></div>
+      <div class="cta rise">
+        <a class="btn grad" href="#contact">Start a project</a>
+        <a class="btn ghost" href="#services">See what we build</a>
+      </div>
+    </div>
+    <div class="mark rise"><img src="logo.png" alt="NORDVION TECH logo"></div>
+  </div>
+</section>
+
+<section class="bands" aria-label="Technologies we build with">
+  <div class="band flat"><div class="track" data-dup></div></div>
+  <div class="band tilt" aria-hidden="true"><div class="track" data-dup data-alt></div></div>
+</section>
+
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="head">
+      <h2>Software that works as hard as you do</h2>
+      <p>From first prototype to production scale, one team handles it end to end.</p>
+    </div>
+    <div class="grid">
+      <article class="card hl wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2.5"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></div><h3>AI &amp; automation</h3><p>Chatbots, copilots, document processing and predictive models trained on your own data.</p></article>
+      <article class="card wide"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/><path d="M14 4l-4 16" opacity=".55"/></svg></div><h3>Custom software</h3><p>Web platforms, internal tools and SaaS products built to fit how your team actually works.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M10.5 18.5h3"/></svg></div><h3>Mobile apps</h3><p>Fast iOS and Android apps with one shared codebase.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9z"/></svg></div><h3>Cloud &amp; DevOps</h3><p>Secure, scalable infrastructure with automated deployment.</p></article>
+      <article class="card"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="7" rx="1.5"/><rect x="3" y="14" width="9" height="7" rx="1.5"/><rect x="16" y="14" width="5" height="7" rx="1.5"/></svg></div><h3>Product design</h3><p>Clear interfaces tested with real users before a line of code ships.</p></article>
+    </div>
+  </div>
+</section>
+
+
+<section class="sec" id="speed" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><h2>From idea to launch in weeks, not months</h2><p>Fixed timelines, weekly demos and a working product at the end.</p></div>
+    <div class="speeds">
+      <article class="speed">
+        <small>Startup MVP</small>
+        <div class="big">5–8 weeks</div>
+        <p>We turn your idea into a working first version your users can try and investors can see.</p>
+        <div class="scale"><div class="track2"><div class="fill max" style="--w2:80%"></div><div class="fill" style="--w:50%"></div></div><div class="wk"><span>Week 1</span><span>5</span><span>8</span><span>10</span></div></div>
+      </article>
+      <article class="speed ai">
+        <small>AI-powered product</small>
+        <div class="big">6–10 weeks</div>
+        <p>Models, data pipelines and a polished interface, built and tested together.</p>
+        <div class="scale"><div class="track2"><div class="fill max" style="--w2:100%"></div><div class="fill" style="--w:60%"></div></div><div class="wk"><span>Week 1</span><span>6</span><span>8</span><span>10</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="products" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><h2>Products we have built</h2><p>A selection of live products used by real people every day.</p></div>
+    <div class="prods">
+      <article class="prod"><div class="shot a"><i></i><i></i><i></i></div><div class="pinfo"><h3>MindDesk AI</h3><p>An AI assistant that answers customer questions and drafts replies for support teams.</p><div class="tags"><span>AI</span><span>SaaS</span><span>Web</span><b>120K+ users</b></div></div></article>
+      <article class="prod"><div class="shot b"><i></i><i></i><i></i></div><div class="pinfo"><h3>FinTrack</h3><p>A mobile app for budgeting, invoices and spending insights for small businesses.</p><div class="tags"><span>Fintech</span><span>iOS &amp; Android</span><b>85K+ users</b></div></div></article>
+      <article class="prod"><div class="shot c"><i></i><i></i><i></i></div><div class="pinfo"><h3>OpsPilot</h3><p>A dashboard that predicts delays and automates routine tasks for logistics teams.</p><div class="tags"><span>Enterprise</span><span>Analytics</span><b>30K+ users</b></div></div></article>
+      <article class="prod"><div class="shot d"><i></i><i></i><i></i></div><div class="pinfo"><h3>LearnLoop</h3><p>An adaptive learning platform that builds study plans around each student.</p><div class="tags"><span>EdTech</span><span>AI</span><b>45K+ users</b></div></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="process" style="padding-top:0">
+  <div class="wrap">
+    <div class="head"><h2>How we work</h2><p>Short cycles, visible progress, no surprises.</p></div>
+    <div class="steps">
+      <div class="step"><b>01</b><h3>Discover</h3><p>We learn your goals, users and constraints.</p></div>
+      <div class="step"><b>02</b><h3>Design</h3><p>Prototypes you can click before we build.</p></div>
+      <div class="step"><b>03</b><h3>Build</h3><p>Weekly releases you can review and steer.</p></div>
+      <div class="step"><b>04</b><h3>Scale</h3><p>Launch, monitor and keep improving.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stats" id="about">
+  <div class="wrap">
+    <div><strong><span data-n="250" data-s="K+">250K+</span></strong><span>Total users across our apps</span></div>
+    <div><strong><span data-n="60" data-s="+">60+</span></strong><span>Projects delivered</span></div>
+    <div><strong><span data-n="40" data-s="+">40+</span></strong><span>Companies served</span></div>
+    <div><strong><span data-n="12" data-s="">12</span></strong><span>Countries reached</span></div>
+  </div>
+</section>
+
+<section class="sec" id="clients">
+  <div class="wrap">
+    <div class="head"><h2>Companies we serve</h2><p>Teams from early-stage startups to global enterprises trust us with their products.</p></div>
+    <div class="logos">
+      <div>Lumora</div><div>Brightwave</div><div>Kestrel Labs</div><div>Northfield</div>
+      <div>QuantaPay</div><div>Verdant</div><div>Helio Health</div><div>Atlas Freight</div>
+    </div>
+    <div class="inds"><span>Fintech</span><span>Healthcare</span><span>Logistics</span><span>Education</span><span>E-commerce</span><span>SaaS</span></div>
+  </div>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div>
+      <h2>Tell us what you want to build</h2>
+      <p class="lead">Share a few details and we will reply within one business day.</p>
+    </div>
+    <form id="form" novalidate>
+      <label>Name<input name="name" required autocomplete="name"></label>
+      <label>Email<input name="email" type="email" required autocomplete="email"></label>
+      <label>What do you need?
+        <select name="type"><option>AI solution</option><option>Web platform</option><option>Mobile app</option><option>Something else</option></select>
+      </label>
+      <label>Project details<textarea name="msg" required></textarea></label>
+      <button class="btn grad" type="submit">Send message</button>
+      <p class="ok" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="fbrand">
+      <a class="brand" href="#top"><img src="logo.png" alt="">NORDVION TECH</a>
+      <p>Beyond Innovation. AI-powered software solutions for startups and enterprises.</p>
+    </div>
+    <nav class="fnav" aria-label="Footer"><a href="#services">Services</a><a href="#speed">Timelines</a><a href="#products">Products</a><a href="#clients">Clients</a><a href="#contact">Contact</a></nav>
+    <div class="social" aria-label="Social media"><a href="https://linkedin.com/company/nordviontech" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45z"/></svg></a><a href="https://x.com/nordviontech" aria-label="X" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.9 2H22l-7.2 8.2L23.3 22h-6.6l-5.2-6.8L5.6 22H2.5l7.7-8.8L1.9 2h6.8l4.7 6.2L18.9 2zm-1.2 18h1.8L7.4 3.9H5.5L17.7 20z"/></svg></a><a href="https://facebook.com/nordviontech" aria-label="Facebook" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.5 1.6-1.5h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V22h3.4z"/></svg></a><a href="https://instagram.com/nordviontech" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a><a href="https://github.com/nordviontech" aria-label="GitHub" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 23.5 12C23.5 5.7 18.3.5 12 .5z"/></svg></a></div>
+  </div>
+  <div class="wrap copy">© <span id="yr"></span> NORDVION TECH. All rights reserved.</div>
+</footer>
+
+<script>
+// Marquee content (duplicated for seamless loop)
+const words=["Python","React","Node.js","TensorFlow","PyTorch","AWS","Azure","Flutter","PostgreSQL","Docker","Next.js","OpenAI API"];
+document.querySelectorAll("[data-dup]").forEach(t=>{
+  const list=t.hasAttribute("data-alt")?[...words].reverse():words;
+  const html=list.map(w=>`<span>${w}</span>`).join("");
+  t.innerHTML=html+html;
+});
+// Mobile menu
+const burger=document.querySelector(".burger"),links=document.querySelector(".links");
+burger.onclick=()=>{const o=links.classList.toggle("open");burger.setAttribute("aria-expanded",o)};
+links.querySelectorAll("a").forEach(a=>a.onclick=()=>links.classList.remove("open"));
+// Footer year
+document.getElementById("yr").textContent=new Date().getFullYear();
+// Contact form: opens the visitor's email app (replace address below)
+const TO="hello@nordviontech.com";
+document.getElementById("form").addEventListener("submit",e=>{
+  e.preventDefault();
+  const f=e.target,d=Object.fromEntries(new FormData(f)),ok=f.querySelector(".ok");
+  if(!d.name||!/\S+@\S+\.\S+/.test(d.email)||!d.msg){ok.style.color="#c0262d";ok.textContent="Please fill in your name, a valid email and project details.";return}
+  location.href=`mailto:${TO}?subject=${encodeURIComponent("New project: "+d.type)}&body=${encodeURIComponent(d.msg+"\n\n"+d.name+" ("+d.email+")")}`;
+  ok.style.color="#0a8a4a";ok.textContent="Opening your email app. Thank you!";
+});
+
+// Count-up numbers (replay each time they enter view)
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  const el=e.target;el._id=(el._id||0)+1;const id=el._id;
+  if(!e.isIntersecting){el.textContent="0"+el.dataset.s;return}
+  const n=+el.dataset.n,suf=el.dataset.s,t0=performance.now();
+  (function f(t){if(id!==el._id)return;const p=Math.min((t-t0)/1400,1),v=Math.round(n*(1-Math.pow(1-p,3)));
+    el.textContent=v+(p<1?"":suf);if(p<1)requestAnimationFrame(f)})(t0);
+}),{threshold:.6});
+document.querySelectorAll("[data-n]").forEach(el=>io.observe(el));
+
+// ---- alive layer ----
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const hero=document.querySelector(".hero");
+["o1","o2"].forEach(c=>{const o=document.createElement("div");o.className="orb "+c;hero.prepend(o)});
+
+// Directional reveals: cards arrive from different sides
+function rv(sel,dirs,step=.08){document.querySelectorAll(sel).forEach((el,i)=>{
+  el.classList.add("rv");el.dataset.d=dirs[i%dirs.length];el.style.setProperty("--dl",(i%4*step)+"s")})}
+rv(".head h2,.head p",["up"],.1);
+rv("#services .card",["left","up","right"]);
+rv(".prod",["left","right"],.12);
+rv(".speed",["left","right"],.12);
+rv(".step",["up"],.12);
+rv(".stats .wrap>div",["zoom"],.1);
+rv(".logos div",["zoom"],.06);
+rv(".inds span",["up"],.05);
+rv(".contact .wrap>div",["left"]);rv(".contact form",["right"]);
+const rio=new IntersectionObserver(es=>es.forEach(e=>{
+  const el=e.target;
+  if(e.isIntersecting&&e.intersectionRatio>=.12){
+    el.classList.add("in");
+    clearTimeout(el._t);el._t=setTimeout(()=>el.classList.add("done"),1500);
+  }else if(!e.isIntersecting){
+    // fully out of view: reset so it flies in again next time (up or down)
+    clearTimeout(el._t);el.classList.remove("in","done");el.style.transform="";
+  }
+}),{threshold:[0,.12],rootMargin:"0px 0px -6% 0px"});
+document.querySelectorAll(".rv").forEach(el=>rio.observe(el));
+
+if(!reduce){
+  // Scroll progress + marquee speeds up while scrolling
+  const bar=document.querySelector(".bar");
+  const anims=[...document.querySelectorAll(".track")].map(t=>t.getAnimations()[0]).filter(Boolean);
+  let last=scrollY,rate=1;
+  (function loop(){
+    const y=scrollY,v=Math.abs(y-last);last=y;
+    rate+=((1+Math.min(v*.3,6))-rate)*.08;
+    anims.forEach(a=>a.playbackRate=rate);
+    bar.style.transform=`scaleX(${y/(document.body.scrollHeight-innerHeight||1)})`;
+    requestAnimationFrame(loop);
+  })();
+  if(matchMedia("(hover:hover)").matches){
+    // Hero parallax follows the cursor
+    hero.addEventListener("mousemove",e=>{const r=hero.getBoundingClientRect();
+      hero.style.setProperty("--mx",(e.clientX-r.left)/r.width-.5);hero.style.setProperty("--my",(e.clientY-r.top)/r.height-.5)});
+    // 3D tilt on cards
+    document.querySelectorAll(".card,.prod").forEach(c=>{
+      c.addEventListener("mousemove",e=>{if(!c.classList.contains("done"))return;
+        const r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+        c.style.transform=`perspective(900px) rotateX(${-py*7}deg) rotateY(${px*9}deg) translateY(-4px)`});
+      c.addEventListener("mouseleave",()=>c.style.transform="");
+    });
+  }
+}
+</script>
+</body>
+</html>
