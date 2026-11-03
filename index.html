@@ -202,6 +202,43 @@ footer{padding:60px 0 30px}
 .social a:hover{background:var(--grad);color:#fff;border-color:transparent;transform:translateY(-4px) rotate(-6deg)}
 .copy{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);font-size:.88rem}
 @media(max-width:860px){.foot{grid-template-columns:1fr}}
+
+/* ---- responsive fixes ---- */
+html,body{max-width:100%;overflow-x:clip}
+main,section,footer{overflow-x:clip}
+.wrap>*,.grid>*,.prods>*,.speeds>*{min-width:0}
+@media(max-width:860px){
+  .js .rv[data-d=left]{--x:-40px;--r:-1.5deg}
+  .js .rv[data-d=right]{--x:40px;--r:1.5deg}
+  .hero{padding:104px 0 50px}
+  .hero .wrap{text-align:left;gap:20px}
+  .hero h1{font-size:clamp(2.6rem,13vw,4rem)}
+  .hero p{font-size:1.05rem;margin:18px 0 24px}
+  .mark{max-width:150px}
+  .bands{padding:20px 0 80px}
+  .band.flat{padding:32px 0}
+  .band.tilt{margin:-6px -8% 0;padding:44px 0 70px}
+  .head{margin-bottom:36px}
+  .card{padding:26px}.card h3{margin-top:30px}
+  .speed{padding:28px}
+  .shot{height:180px}
+  .pinfo{padding:22px}
+  .step{padding-right:14px}
+  .stats{padding:56px 0}
+  .logos div{padding:28px 8px;font-size:1.1rem}
+  .contact .wrap{gap:36px}
+  .foot{gap:28px}
+}
+@media(max-width:520px){
+  .wrap{width:calc(100% - 32px)}
+  .steps{grid-template-columns:1fr}
+  .stats .wrap{gap:26px 16px}
+  .cta .btn{flex:1 1 100%}
+  .chips span{font-size:.82rem}
+  .tags b{margin-left:0;width:100%}
+  .head h2{max-width:none}
+  .social a{width:42px;height:42px}
+}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
