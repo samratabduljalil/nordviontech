@@ -711,6 +711,42 @@ form .btn{padding:16px 24px;font-size:1.05rem}
 @keyframes lk{0%,8%{background:#fff;border-color:#c7d3f5}16%,88%{background:#19c37d;border-color:#19c37d}96%,100%{background:#fff;border-color:#c7d3f5}}
 @media(max-width:700px){.prod .shot{height:270px}.uiw{width:92%;height:210px}}
 @media(prefers-reduced-motion:reduce){.uiw *{animation:none!important}.tk,.draft,.tx{opacity:1}.tp{width:100%}.ln2 .line{stroke-dashoffset:0}.ln2 .area{opacity:1}.tk .bd.bok,.alt{opacity:1}.rfg{stroke-dashoffset:42}.cx1{display:none}.cx2{opacity:1}}
+
+/* ---- services: stable height + mobile fixes ---- */
+.svc-stage{display:grid}
+.panel{display:grid;grid-area:1/1;gap:22px;align-content:start;visibility:hidden;opacity:0;pointer-events:none;min-width:0}
+.panel.on{visibility:visible;opacity:1;pointer-events:auto;animation:panelin .35s cubic-bezier(.2,.7,.2,1)}
+.panel:not(.on) *{animation:none!important}
+.win,.vis,.ptext{min-width:0}
+@media(max-width:860px){
+  .svc-list{-webkit-overflow-scrolling:touch;margin:0 -16px;padding:0 16px 8px;scroll-padding:0 16px}
+  .svc-stage{min-height:0;padding:12px}
+  .ptext{padding:0 4px 4px}
+  .ptext h3{font-size:1.35rem}
+  .ptext li{font-size:.95rem}
+  .code{font-size:.72rem;padding:14px;line-height:1.95}
+  .vis{height:210px;padding:14px}
+  .b{font-size:.82rem;max-width:88%}
+  .phone{transform:scale(.95)}
+  .toast{right:4px;top:30px;font-size:.74rem;padding:8px 12px}
+  .ok2{right:10px;top:10px;font-size:.7rem}
+  .wf{max-width:100%}
+}
+@media(max-width:380px){.code{font-size:.66rem}.svc-list .t{font-size:.88rem}}
+
+/* ---- grid overflow fix (rows must never widen the page) ---- */
+.svc{grid-template-columns:minmax(0,.85fr) minmax(0,1.25fr)}
+.svc-side,.svc-stage,.bt,.prod,.member,.card,.sp,.sp-panel{min-width:0}
+.svc-list{max-width:100%}
+@media(max-width:860px){
+  .svc{grid-template-columns:minmax(0,1fr)}
+  .svc-side{max-width:100%;overflow:hidden}
+  .svc-list{overflow-x:auto;overscroll-behavior-x:contain;touch-action:pan-x pan-y}
+  .prods{grid-template-columns:minmax(0,1fr)}
+  .members{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:700px){.whygrid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:520px){.members{grid-template-columns:minmax(0,1fr)}}
 </style>
 <script>document.documentElement.classList.add("js")</script>
 </head>
@@ -855,7 +891,7 @@ form .btn{padding:16px 24px;font-size:1.05rem}
 <section class="sec" id="team" style="padding-top:0">
   <div class="wrap">
     <div class="head"><h2>The people behind the code</h2><p>Real engineers, designers and AI specialists. You talk directly to the people building your product.</p></div>
-    
+    <div class="banner"><img src="https://images.pexels.com/photos/12899188/pexels-photo-12899188.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Developers reviewing code together in an office" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()"></div>
     <div class="note">
       <div class="av big" style="--g:linear-gradient(135deg,#00D4FF,#1E5BFF)">A</div>
       <div>
@@ -1095,7 +1131,11 @@ addEventListener("scroll",upd,{passive:true});
   const tabs=[...svc.querySelectorAll(".svc-list button")],panels=[...svc.querySelectorAll(".panel")],DUR=1500;
   let cur=0,timer,visible=false;svc.style.setProperty("--dur",DUR+"ms");
   function show(i){cur=i;tabs.forEach((t,k)=>{t.classList.remove("on");t.setAttribute("aria-selected",k===i)});
-    void svc.offsetWidth;tabs[i].classList.add("on");panels.forEach((p,k)=>p.classList.toggle("on",k===i))}
+    void svc.offsetWidth;tabs[i].classList.add("on");panels.forEach((p,k)=>p.classList.toggle("on",k===i));
+    const L=tabs[i].closest(".svc-list");
+    if(L&&L.scrollWidth>L.clientWidth+4){ // phones: keep the active pill in view (sideways only, never moves the page)
+      const b=tabs[i].getBoundingClientRect(),l=L.getBoundingClientRect();
+      L.scrollTo({left:L.scrollLeft+(b.left-l.left)-(L.clientWidth-b.width)/2,behavior:"smooth"})}}
   // keeps cycling one by one, whether or not anyone clicks
   function plan(){clearTimeout(timer);if(reduce||!visible)return;timer=setTimeout(()=>{show((cur+1)%tabs.length);plan()},DUR)}
   function pick(i){show(i);plan()} // a click just jumps there, then the cycle continues
